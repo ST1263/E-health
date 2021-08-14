@@ -1,0 +1,52 @@
+<?php
+$dbhost='localhost';
+$dbname='e_Health';
+$dbusername='root';
+$dbpass='';
+
+$conn = mysqli_connect("$dbhost", "$dbusername", "$dbpass", "$dbname");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>View</title>
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+			min-height: 100vh;
+		}
+		.alb {
+			width: 200px;
+			height: 200px;
+			padding: 5px;
+		}
+		.alb img {
+			width: 100%;
+			height: 100%;
+		}
+		a {
+			text-decoration: none;
+			color: black;
+		}
+	</style>
+</head>
+<body>
+     <a href="Patient_profile.php">&#8592;</a>
+     <?php 
+          $sql = "SELECT profile_img FROM patient_profile order by name DESC limit 1";
+          $res = mysqli_query($conn,  $sql);
+
+          if (mysqli_num_rows($res) > 0) {
+          	while ($images = mysqli_fetch_assoc($res)) {  ?>
+             
+             <div class="alb">
+             	<img src="uploads/<?=$images['profile_img']?>">
+             	<!-- <img src="<?php// echo $images[//'profile_img'];?>"> -->
+             </div>
+          		
+    <?php } }?>
+</body>
+</html>
